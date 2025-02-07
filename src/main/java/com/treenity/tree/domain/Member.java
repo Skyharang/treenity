@@ -1,9 +1,12 @@
 package com.treenity.tree.domain;
 
+import com.treenity.tree.type.MemberType;
+import com.treenity.tree.type.TermsAgreeType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -11,6 +14,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Member {
 
     @Id
@@ -28,7 +35,7 @@ public class Member {
     private String pw;
 
     @Column(nullable = false)
-    private String birthday;
+    private LocalDateTime birthday;
 
     @Column(nullable = false)
     private String email;
@@ -37,19 +44,28 @@ public class Member {
     private String phone;
 
     @Column(nullable = false)
-    private Integer admin;
+    @Enumerated(EnumType.STRING)
+    private MemberType memberType;
 
     @Column(nullable = false)
-    private OffsetDateTime date;
+    private LocalDateTime signDate;
 
     @Column(nullable = false)
-    private Integer person;
+    @Enumerated(EnumType.STRING)
+    private TermsAgreeType terms;
 
+    // 위도
     @Column(nullable = false)
-    private Integer gps;
+    private Integer latitude;
 
+    // 경도
     @Column(nullable = false)
-    private Integer gps1;
+    private Integer longitude;
+
+
+
+
+
 
     @OneToMany(mappedBy = "number")
     private Set<Grow> numberGrows;
