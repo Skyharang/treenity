@@ -1,75 +1,57 @@
 package com.treenity.tree.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.OffsetDateTime;
-import java.util.Set;
+import java.time.LocalDate;
 
-
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "member")
 public class Member {
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(nullable = false, updatable = false)
+    @Column(name = "member_id", nullable = false)
     private String memberId;
 
-    @Column(nullable = false)
-    private String id;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String pw;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-    @Column(nullable = false)
+    @Column(name = "birthday", nullable = false)
     private String birthday;
 
-    @Column(nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(nullable = false)
-    private Integer admin;
+    @ColumnDefault("1")
+    @Column(name = "user_type", nullable = false)
+    private Byte userType;
 
-    @Column(nullable = false)
-    private OffsetDateTime date;
+    @Column(name = "signdate", nullable = false)
+    private LocalDate signdate;
 
-    @Column(nullable = false)
-    private Integer person;
+    @ColumnDefault("0")
+    @Column(name = "terms", nullable = false)
+    private Byte terms;
 
-    @Column(nullable = false)
-    private Integer gps;
+    @Column(name = "latitude")
+    private Integer latitude;
 
-    @Column(nullable = false)
-    private Integer gps1;
-
-    @OneToMany(mappedBy = "number")
-    private Set<Grow> numberGrows;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Board> memberBoards;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Chat> memberChats;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Bookmark> memberBookmarks;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Qa> memberQas;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Star> memberStars;
-
-    @OneToMany(mappedBy = "member")
-    private Set<Sos> memberSoses;
+    @Column(name = "longlatitude")
+    private Integer longlatitude;
 
 }

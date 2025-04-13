@@ -7,18 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "bookmark")
-public class Bookmark {
+@Table(name = "pick")
+public class Pick {
     @Id
-    @Column(name = "bookmark_num", nullable = false)
-    private String bookmarkNum;
+    @Column(name = "pick_num", nullable = false)
+    private String pickNum;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_num", nullable = false)
-    private com.treenity.tree.domain.Member memberNum;
+    private Member memberNum;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "plant_num", nullable = false)
-    private com.treenity.tree.domain.Plant plantNum;
+    @JoinColumn(name = "board_num", nullable = false)
+    private Board boardNum;
 
 }

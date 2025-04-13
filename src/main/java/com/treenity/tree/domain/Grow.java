@@ -3,49 +3,44 @@ package com.treenity.tree.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
-
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "grow")
 public class Grow {
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(nullable = false, updatable = false)
-    private String number;
+    @Column(name = "grow_num", nullable = false)
+    private String growNum;
 
-    @Column(nullable = false)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member_num", nullable = false)
+    private com.treenity.tree.domain.Member memberNum;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "plant_num", nullable = false)
+    private com.treenity.tree.domain.Plant plantNum;
+
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
+
+    @Column(name = "category", nullable = false)
     private String category;
 
-    @Column(nullable = false)
-    private OffsetDateTime date;
+    @Column(name = "started_at", nullable = false)
+    private LocalDate startedAt;
 
-    @Column(nullable = false)
-    private String photo;
+    @Column(name = "image")
+    private String image;
 
-    @Column(nullable = false)
-    private Integer water;
+    @Column(name = "water")
+    private String water;
 
-    @Column
-    private Integer alam;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bk_number_id", nullable = false)
-    private Plant bkNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tp_number_id", nullable = false)
-    private Plant tpNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "number_id", nullable = false)
-    private Member member;
-
+    @ColumnDefault("0")
+    @Column(name = "alam", nullable = false)
+    private Byte alam;
 
 }

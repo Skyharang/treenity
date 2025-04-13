@@ -3,73 +3,49 @@ package com.treenity.tree.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.OffsetDateTime;
-import java.util.Set;
+import java.time.Instant;
 
-
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "board")
 public class Board {
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(nullable = false, updatable = false)
-    private String number;
+    @Column(name = "board_num", nullable = false)
+    private String boardNum;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member_num", nullable = false)
+    private com.treenity.tree.domain.Member memberNum;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(nullable = false)
-    private String photo;
+    @Column(name = "image")
+    private String image;
 
-    @Column(nullable = false)
-    private OffsetDateTime date;
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
 
-    @Column(nullable = false)
-    private String category;
+    @ColumnDefault("(0)")
+    @Column(name = "category", nullable = false)
+    private Integer category;
 
-    @Column(nullable = false)
-    private OffsetDateTime trash;
+    @ColumnDefault("(0)")
+    @Column(name = "deleted_at", nullable = false)
+    private Instant deletedAt;
 
-    @Column(nullable = false)
+    @ColumnDefault("(0)")
+    @Column(name = "price")
     private Integer price;
 
-    @Column(nullable = false)
-    private String why;
-
-    @Column
-    private String reply;
-
-    @Column(nullable = false)
-    private Integer love;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
-
-    @OneToMany(mappedBy = "bdNumber")
-    private Set<Chat> bdNumberChats;
-
-    @OneToMany(mappedBy = "wrNumber")
-    private Set<Chat> wrNumberChats;
-
-    @OneToMany(mappedBy = "bdNumber")
-    private Set<Star> bdNumberStars;
-
-    @OneToMany(mappedBy = "wrNumber")
-    private Set<Star> wrNumberStars;
-
-    @OneToMany(mappedBy = "bdNumber")
-    private Set<Sos> bdNumberSoses;
-
-    @OneToMany(mappedBy = "wrNumber")
-    private Set<Sos> wrNumberSoses;
-
-
+    @ColumnDefault("(0)")
+    @Column(name = "likes")
+    private Integer likes;
 
 }

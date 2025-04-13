@@ -4,40 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
-
-
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "chat")
 public class Chat {
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(nullable = false, updatable = false)
-    private String number;
+    @Column(name = "room_num", nullable = false)
+    private String roomNum;
 
-    @Column(nullable = false)
-    private String detail;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "board_num", nullable = false)
+    private Board boardNum;
 
-    @Column(nullable = false)
-    private OffsetDateTime time;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member1", nullable = false)
+    private com.treenity.tree.domain.Member member1;
 
-    @Column(nullable = false)
-    private String photo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bd_number_id", nullable = false)
-    private Board bdNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wr_number_id", nullable = false)
-    private Board wrNumber;
-
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member2", nullable = false)
+    private com.treenity.tree.domain.Member member2;
 
 }

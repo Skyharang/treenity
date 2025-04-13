@@ -4,53 +4,35 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
-import java.util.Set;
-
-
-@Entity
 @Getter
 @Setter
+@Entity
+@Table(name = "plant")
 public class Plant {
-
     @Id
-    @GeneratedValue(generator = "uuid")
-    @Column(nullable = false, updatable = false)
-    private String number;
+    @Column(name = "plant_num", nullable = false)
+    private String plantNum;
 
-    @Column(nullable = false)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "species_num", nullable = false)
+    private com.treenity.tree.domain.Species speciesNum;
 
-    @Column(nullable = false)
-    private String home;
+    @Column(name = "plant_name", nullable = false)
+    private String plantName;
 
-    @Column(nullable = false)
-    private String text;
+    @Column(name = "`explain`", nullable = false)
+    private String explain;
 
-    @Column(nullable = false)
-    private String environment;
+    @Column(name = "habitat", nullable = false)
+    private String habitat;
 
-    @Column(nullable = false)
-    private String photo;
+    @Column(name = "enviroment", nullable = false)
+    private String enviroment;
 
-    @Column(nullable = false)
-    private OffsetDateTime water;
+    @Column(name = "image", nullable = false)
+    private String image;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tp_number_id", nullable = false)
-    private PlantType tpNumber;
-
-    @OneToMany(mappedBy = "bkNumber")
-    private Set<Grow> bkNumberGrows;
-
-    @OneToMany(mappedBy = "tpNumber")
-    private Set<Grow> tpNumberGrows;
-
-    @OneToMany(mappedBy = "bkNumber")
-    private Set<Bookmark> bkNumberBookmarks;
-
-    @OneToMany(mappedBy = "tpNumber")
-    private Set<Bookmark> tpNumberBookmarks;
-
+    @Column(name = "cycle", nullable = false)
+    private String cycle;
 
 }
