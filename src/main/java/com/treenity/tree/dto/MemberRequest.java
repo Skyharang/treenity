@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class MemberRequest {
 
-    private UUID memberId;
+    private String memberId;
 
     private String userId;
 

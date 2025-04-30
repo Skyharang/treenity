@@ -20,7 +20,7 @@ public class Member {
     @Id
     @GeneratedValue(generator = "uuid")
     @Column(name = "member_id", nullable = false)
-    private UUID memberId;
+    private String memberId;
 
     @Column(name = "user_id", nullable = false)
     @NonNull
