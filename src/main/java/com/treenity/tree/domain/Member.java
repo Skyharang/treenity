@@ -1,14 +1,12 @@
 package com.treenity.tree.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -53,5 +51,13 @@ public class Member {
 
     @Column(name = "longlatitude")
     private Integer longlatitude;
+
+    @PrePersist
+    public void onPrePersist() {
+        if (this.memberId == null) {
+            //UUID 생성 후 문자열로 변환
+            this.memberId = UUID.randomUUID().toString();
+        }
+    }
 
 }
